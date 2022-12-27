@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "472387904613",
+    "project_id": "food-allergen-app",
+    "storage_bucket": "food-allergen-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472387904613:android:8cbd950b2449dea2c8d28c",
+        "android_client_info": {
+          "package_name": "com.example.food_allergen_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "472387904613-ck6aqb1tt0kg8q3pr9i67pgik3aklk5a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLAejiwPh1MNYq9bHqL9ICy_L6YR7TwaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "472387904613-ck6aqb1tt0kg8q3pr9i67pgik3aklk5a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
