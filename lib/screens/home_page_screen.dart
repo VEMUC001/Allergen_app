@@ -18,6 +18,11 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
+              'Zalogowany jako:',
+                  style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 8),
+            Text(
               user.email!,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
             ),

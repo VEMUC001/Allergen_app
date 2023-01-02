@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_allergen_app/screens/auth_screen.dart';
 import 'package:food_allergen_app/screens/home_page_screen.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_allergen_app/screens/user_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:food_allergen_app/widgets/login_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../utils.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+    scaffoldMessengerKey: Utils.messengerKey,
     navigatorKey: navigatorKey,
     debugShowCheckedModeBanner: false,
     title: title,
@@ -50,11 +53,10 @@ class MainPage extends StatelessWidget {
         } else if (snapshot.hasData) {
           return HomePage();
         } else {
-          return LoginWidget();
+          return AuthPage();
         }
-
       }
-    )
+    ),
   );
 }
 
