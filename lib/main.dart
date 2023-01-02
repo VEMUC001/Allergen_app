@@ -4,6 +4,7 @@ import 'package:food_allergen_app/screens/home_page_screen.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_allergen_app/screens/user_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:food_allergen_app/screens/verify_email_screen.dart';
 import 'package:food_allergen_app/widgets/login_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../utils.dart';
@@ -51,11 +52,11 @@ class MainPage extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Center(child: Text('Coś poszło nie tak'));
         } else if (snapshot.hasData) {
-          return HomePage();
+          return VerifyEmailPage();
         } else {
           return AuthPage();
         }
-      }
+      },
     ),
   );
 }
