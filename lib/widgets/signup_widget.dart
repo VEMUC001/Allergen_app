@@ -21,12 +21,14 @@ class SignUpWidget extends StatefulWidget {
 class _SignUpWidgetState extends State<SignUpWidget> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void disponse() {
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
 
     super.dispose();
   }
@@ -69,6 +71,18 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             validator: (value) =>
             value != null && value.length < 6
                 ? 'Hasło musi zawierać przynajmniej 6 znaków'
+                : null,
+          ),
+          SizedBox(height: 4),
+          TextFormField(
+            controller: confirmPasswordController,
+            textInputAction: TextInputAction.done,
+            decoration: InputDecoration(labelText: 'Potiwerdź hasło'),
+            obscureText: true,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) =>
+            value != passwordController.text
+                ? 'Hasło nie pasuje!'
                 : null,
           ),
           SizedBox(height: 20),
