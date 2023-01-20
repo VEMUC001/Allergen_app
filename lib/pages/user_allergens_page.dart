@@ -1,58 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-import '../models/checkbox_state.dart';
-
-class UserAllergensPage extends StatefulWidget {
-  const UserAllergensPage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<UserAllergensPage> createState() => _UserAllergensPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _UserAllergensPageState extends State<UserAllergensPage> {
-
-  final allergens = [
-    CheckBoxState(title: 'Gluten'),
-    CheckBoxState(title: 'Milk'),
-    CheckBoxState(title: 'Fish'),
-    CheckBoxState(title: 'Crustaceans'),
-    CheckBoxState(title: 'Nuts'),
-    CheckBoxState(title: 'Peanuts'),
-    CheckBoxState(title: 'Eggs'),
-    CheckBoxState(title: 'Soybeans'),
-    CheckBoxState(title: 'Celery'),
-    CheckBoxState(title: 'Mustard'),
-    CheckBoxState(title: 'Sesame seeds'),
-    CheckBoxState(title: 'Lupin'),
-    CheckBoxState(title: 'Molluscs'),
-    CheckBoxState(title: 'Sulphites'),
-    CheckBoxState(title: 'Corn'),
-    CheckBoxState(title: 'Buckwheat'),
-  ];
+class _HomePageState extends State<HomePage> {
+  String? scanResult;
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: Text('Wybór alergenów'),
+      title: Text('przykład'),
+      centerTitle: true,
     ),
-    body: ListView(
-      padding: EdgeInsets.all(12),
-      children: [
-        ...allergens.map(buildSingleCheckbox).toList(),
-      ],
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.amber,
+              onPrimary: Colors.black,
+            ),
+            icon: Icon(Icons.camera_alt_outlined),
+            label: Text('Start scan'),
+            onPressed: scanBarcode,
+          ),
+          SizedBox(height: 20),
+          Text(
+            scanResult == null
+              ? 'Scan a code!'
+              : 'Scan results : $scanResult',
+            style: TextStyle(fontSize: 18),
+          ),
+        ],
+      ),
     ),
   );
 
-  Widget buildSingleCheckbox(CheckBoxState checkbox) => CheckboxListTile(
-    controlAffinity: ListTileControlAffinity.leading,
-    activeColor: Colors.white,
-    value: checkbox.value,
-    title: Text(
-      checkbox.title,
-      style: TextStyle(fontSize: 20),
-    ),
-    onChanged: (value) => setState(() => checkbox.value = value!),
-  );
+  Future scanBarcode() async {
+    String scanResult;
+    try {
+      scanResult = await FlutterBarcodeScanner.scanBarcode(
+          "#ff6666",
+          "Anuluj",
+          true,
+          ScanMode.BARCODE
+      );
+    } on PlatformException {
+      scanResult = 'Nieudane skanowanie!';
+    }
+    if (!mounted) return;
+  }
 }
-
-

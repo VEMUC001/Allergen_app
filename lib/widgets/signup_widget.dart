@@ -77,7 +77,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           TextFormField(
             controller: confirmPasswordController,
             textInputAction: TextInputAction.done,
-            decoration: InputDecoration(labelText: 'Potiwerdź hasło'),
+            decoration: InputDecoration(labelText: 'Potwierdź hasło'),
             obscureText: true,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) =>

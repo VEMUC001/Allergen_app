@@ -52,7 +52,7 @@ class _AllergensPageState extends State<AllergensPage> {
                 );
               },
             );
-          }
+          },
       ),
     );
   }
