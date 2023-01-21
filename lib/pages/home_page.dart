@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:openfoodfacts/model/ProductResultV3.dart';
-import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
-import 'package:openfoodfacts/utils/TagType.dart';
-import '../barcode_scanner.dart';
+import 'package:food_allergen_app/pages/result_page.dart';
 import 'allergens_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,10 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
   String? scanResult;
-  var scanName = "";
-  var scanIngredients = "";
-  var scanAllergens = "";
-  var db;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -85,5 +78,27 @@ class _HomePageState extends State<HomePage> {
       ),
     ),
   );
+
+  Future scanBarcode() async {
+    String scanResult;
+    try {
+      scanResult = await FlutterBarcodeScanner.scanBarcode(
+          "#ff6666",
+          "Anuluj",
+          true,
+          ScanMode.BARCODE
+      );
+    } on PlatformException {
+      scanResult = 'Nieudane skanowanie!';
+    }
+    if (!mounted) return;
+
+    setState(() => this.scanResult = scanResult);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ResultPage()),
+    );
+  }
 }
 
