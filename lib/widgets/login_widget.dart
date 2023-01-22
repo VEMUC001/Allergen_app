@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_auth_email/main.dart';
-//import 'package:firebase_auth_email/utils/utils.dart';
 import 'package:flutter/gestures.dart';
 
 import '../main.dart';

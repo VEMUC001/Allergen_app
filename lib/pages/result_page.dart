@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:openfoodfacts/model/Product.dart';
 
@@ -13,11 +15,14 @@ class ResultPage extends StatefulWidget {
 
 class _ResultPageState extends State<ResultPage> {
   Product? product;
+  List<String> matchingAllergens = [];
+  List<String> selectedAllergens = [];
 
   @override
   void initState() {
     super.initState();
     getProductInfo();
+    getSelectedAllergens();
   }
 
   @override
@@ -52,9 +57,22 @@ class _ResultPageState extends State<ResultPage> {
       //           style: TextStyle(fontSize: 18),
       //         ),
       //         SizedBox(height: 8),
-      //         Text(
-      //           'Alergeny: ${product.allergens}',
-      //           style: TextStyle(fontSize: 18),
+      //         FutureBuilder(
+      //           future: getSelectedAllergens(),
+      //           builder: (context, snapshot) {
+      //             if (snapshot.connectionState == ConnectionState.waiting) {
+      //               return Text("Loading...");
+      //             } else {
+      //               final selectedAllergens = snapshot.data;
+      //               final allergensInProduct = product.allergens.split(",");
+      //               final matchingAllergens = selectedAllergens.where((allergen) => allergensInProduct.contains(allergen)).toList();
+      //               if (matchingAllergens.isEmpty) {
+      //                 return Text("Produkt nie zawiera alergenów");
+      //               } else {
+      //                 return Text("Alergeny: " + matchingAllergens.join(", "), style: TextStyle(color: Colors.red));
+      //               }
+      //             }
+      //           },
       //         ),
       //       ],
       //       if (product == null)
@@ -68,9 +86,21 @@ class _ResultPageState extends State<ResultPage> {
   Future getProductInfo() async {
     try {
       final product = await getProduct(widget.scanResult);
-      setState(() => this.product = product);
+      final selectedAllergens = await getSelectedAllergens();
+      //final matchingAllergens = selectedAllergens.where((allergen) => product.ingredientsText.contains(allergen)).toList();
+      setState(() {
+        this.product = product;
+        this.matchingAllergens = matchingAllergens;
+      });
     } catch (e) {
       print(e);
     }
   }
+}
+
+Future getSelectedAllergens() async {
+  final user = FirebaseAuth.instance.currentUser!;
+  final uid = user.uid;
+  final allergens = await FirebaseFirestore.instance.collection("Users").doc(uid).collection("Allergens").where("isChecked", isEqualTo: true).get();
+  return allergens.docs.map((doc) => doc.data()["name"] as String).toList();
 }
