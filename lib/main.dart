@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_allergen_app/pages/auth_page.dart';
-import 'package:food_allergen_app/pages/home_page.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:food_allergen_app/pages/user_allergens_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:food_allergen_app/pages/verify_email_page.dart';
-import 'package:food_allergen_app/widgets/login_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../utils.dart';
 
