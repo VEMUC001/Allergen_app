@@ -19,6 +19,7 @@ class _AllergensPageState extends State<AllergensPage> {
         'Users').doc(user.uid).collection('Allergens').snapshots();
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Wybór alergenów'),
       ),
       floatingActionButton: FloatingActionButton(

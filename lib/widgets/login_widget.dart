@@ -38,14 +38,20 @@ class _LoginWidgetState extends State<LoginWidget> {
      mainAxisAlignment: MainAxisAlignment.center,
      children: [
        SizedBox(height: 60),
-       FlutterLogo(size: 120),
-       SizedBox(height: 20),
        Text(
-         'Cześć nieznajomy!',
+         'Allergen Scanner',
          textAlign: TextAlign.center,
-         style: TextStyle(fontSize: 32, fontWeight: FontWeight.normal),
+         style: TextStyle(fontSize: 35, fontWeight: FontWeight.normal),
        ),
-       SizedBox(height: 40),
+       SizedBox(height: 35),
+       Image.asset('assets/images/barcode-scanner.png'),
+       SizedBox(height: 20),
+       // Text(
+       //   'Witaj!',
+       //   textAlign: TextAlign.center,
+       //   style: TextStyle(fontSize: 35, fontWeight: FontWeight.normal),
+       // ),
+       //SizedBox(height: 20),
        TextField(
          controller: emailController,
          cursorColor: Colors.white,

@@ -19,7 +19,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: Text('Strona główna'),
+      centerTitle: true,
+      title: Text('Allergen Scanner'),
     ),
     body: Padding(
       padding: EdgeInsets.all(32),
@@ -28,16 +29,25 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Text(
             'Zalogowany jako:',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 10),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 6),
           Text(
             user.email!,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+            style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal),
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 30),
+          Image.asset('assets/images/barcode-scanner.png'),
+          SizedBox(height: 30),
           ElevatedButton(
-            child: const Text('Wybierz alergeny'),
+            style: ElevatedButton.styleFrom(
+              minimumSize: Size.fromHeight(45),
+              primary: Colors.amber,
+              onPrimary: Colors.black,
+            ),
+            child: const Text('Wybierz alergeny',
+              style: TextStyle(fontSize: 24),
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -45,34 +55,43 @@ class _HomePageState extends State<HomePage> {
               );
             },
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 30),
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
+              minimumSize: Size.fromHeight(45),
               primary: Colors.amber,
               onPrimary: Colors.black,
             ),
-            icon: Icon(Icons.camera_alt_outlined),
-            label: Text('Start scan'),
+            icon: Icon(Icons.photo_camera_outlined, size: 32),
+            label: Text('Zeskanuj kod',
+              style: TextStyle(fontSize: 24),
+            ),
             onPressed: () => scanBarcode(),
           ),
           SizedBox(height: 20),
-          Text(
-            scanResult == null
-                ? 'Scan a code!'
-                : 'Scan results : $scanResult',
-            style: TextStyle(fontSize: 18),
-          ),
+          // Text(
+          //   scanResult == null
+          //       ? 'Scan a code!'
+          //       : 'Scan results : $scanResult',
+          //   style: TextStyle(fontSize: 18),
+          // ),
           SizedBox(height: 40),
-          ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size.fromHeight(50),
-            ),
-            icon: Icon(Icons.arrow_back, size: 32),
-            label: Text(
-              'Wyloguj się',
-              style: TextStyle(fontSize: 24),
-            ),
+          // ElevatedButton.icon(
+          //   style: ElevatedButton.styleFrom(
+          //     minimumSize: Size.fromHeight(50),
+          //   ),
+          //   icon: Icon(Icons.arrow_back, size: 32),
+          //   label: Text(
+          //     'Wyloguj się',
+          //     style: TextStyle(fontSize: 24),
+          //   ),
+          //   onPressed: () => FirebaseAuth.instance.signOut(),
+          // ),
+          // SizedBox(height: 40),
+          FloatingActionButton(
             onPressed: () => FirebaseAuth.instance.signOut(),
+            backgroundColor: Colors.green,
+            child: const Icon(Icons.login_outlined, size: 32),
           ),
         ],
       ),
