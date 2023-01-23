@@ -32,55 +32,62 @@ class _ResultPageState extends State<ResultPage> {
         centerTitle: true,
         title: Text('Karta produktu'),
       ),
-      // body: Padding(
-      //   padding: EdgeInsets.all(32),
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: <Widget>[
-      //       if (product != null) ...[
-      //         Text(
-      //           product.productName,
-      //           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      //         ),
-      //         SizedBox(height: 8),
-      //         Text(
-      //           'Kod kreskowy: ${product.code}',
-      //           style: TextStyle(fontSize: 18),
-      //         ),
-      //         SizedBox(height: 8),
-      //         Text(
-      //           'Producent: ${product.brands}',
-      //           style: TextStyle(fontSize: 18),
-      //         ),
-      //         SizedBox(height: 8),
-      //         Text(
-      //           'Skład: ${product.ingredientsText}',
-      //           style: TextStyle(fontSize: 18),
-      //         ),
-      //         SizedBox(height: 8),
-      //         FutureBuilder(
-      //           future: getSelectedAllergens(),
-      //           builder: (context, snapshot) {
-      //             if (snapshot.connectionState == ConnectionState.waiting) {
-      //               return Text("Loading...");
-      //             } else {
-      //               final selectedAllergens = snapshot.data;
-      //               final allergensInProduct = product.allergens.split(",");
-      //               final matchingAllergens = selectedAllergens.where((allergen) => allergensInProduct.contains(allergen)).toList();
-      //               if (matchingAllergens.isEmpty) {
-      //                 return Text("Produkt nie zawiera alergenów");
-      //               } else {
-      //                 return Text("Alergeny: " + matchingAllergens.join(", "), style: TextStyle(color: Colors.red));
-      //               }
-      //             }
-      //           },
-      //         ),
-      //       ],
-      //       if (product == null)
-      //         Text('Brak informacji o produkcie'),
-      //     ],
-      //   ),
-      // ),
+      body: Padding(
+        padding: EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            if (product != null) ...[
+              Image.network(
+                product!.imageFrontSmallUrl!,
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(height: 8),
+              Text(
+                product!.productName!,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8),
+              // Text(
+              //   'Kod kreskowy: ${product.code}',
+              //  style: TextStyle(fontSize: 18),
+              // ),
+              SizedBox(height: 8),
+              Text(
+                'Producent: ${product!.brands}',
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Skład: ${product!.ingredientsText}',
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 8),
+              FutureBuilder(
+                future: getSelectedAllergens(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading...");
+                  } else {
+                    final selectedAllergens = snapshot.data;
+                    final allergensInProduct = product!.allergens.toString().split(",");
+                    final matchingAllergens = selectedAllergens.where((allergen) => allergensInProduct!.contains(allergen)).toList();
+                    if (matchingAllergens.isEmpty) {
+                      return Text("Produkt nie zawiera alergenów");
+                    } else {
+                      return Text("Alergeny: " + matchingAllergens.join(", "), style: TextStyle(color: Colors.red));
+                    }
+                  }
+                },
+              ),
+            ],
+            if (product == null)
+              Text('Brak informacji o produkcie ${widget.scanResult}'),
+          ],
+        ),
+      ),
     );
   }
 
@@ -88,7 +95,7 @@ class _ResultPageState extends State<ResultPage> {
     try {
       final product = await getProduct(widget.scanResult);
       final selectedAllergens = await getSelectedAllergens();
-      //final matchingAllergens = selectedAllergens.where((allergen) => product.ingredientsText.contains(allergen)).toList();
+      final matchingAllergens = selectedAllergens.where((allergen) => product!.ingredientsText!.contains(allergen)).toList();
       setState(() {
         this.product = product;
         this.matchingAllergens = matchingAllergens;

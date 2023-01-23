@@ -114,8 +114,8 @@ class _HomePageState extends State<HomePage> {
 
     setState(() => this.scanResult = scanResult);
 
-    Navigator.push(
-      context,
+    Navigator.of(context).push(
+      //context,
       MaterialPageRoute(builder: (context) => ResultPage(scanResult: scanResult)),
     );
   }

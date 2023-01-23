@@ -2,7 +2,6 @@ import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 
 Future<Product?> getProduct(String barcode) async {
-  var barcode = '';
 
   final ProductQueryConfiguration configuration = ProductQueryConfiguration(
     barcode,
