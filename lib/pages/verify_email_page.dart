@@ -68,14 +68,14 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       ? HomePage()
       : Scaffold(
         appBar: AppBar(
-          title: Text('Zweryfikuj Swój Email'),
+          title: const Text('Zweryfikuj Swój Email'),
         ),
     body: Padding(
       padding: EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Wysłano weryfikacyjnego emaila',
             style: TextStyle(fontSize: 20),
             textAlign: TextAlign.center,

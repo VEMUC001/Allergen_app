@@ -44,7 +44,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           SizedBox(height: 60),
           FlutterLogo(size: 120),
           SizedBox(height: 20),
-          Text(
+          const Text(
             'Cześć, witaj z powrotem!',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.normal),
@@ -91,7 +91,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               minimumSize: Size.fromHeight(50),
             ),
             icon: Icon(Icons.arrow_forward, size: 32),
-            label: Text(
+            label: const Text(
               'Zarejestruj się',
               style: TextStyle(fontSize: 24),
             ),

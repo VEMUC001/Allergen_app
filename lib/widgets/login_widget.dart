@@ -38,7 +38,7 @@ class _LoginWidgetState extends State<LoginWidget> {
      mainAxisAlignment: MainAxisAlignment.center,
      children: [
        SizedBox(height: 60),
-       Text(
+       const Text(
          'Allergen Scanner',
          textAlign: TextAlign.center,
          style: TextStyle(fontSize: 35, fontWeight: FontWeight.normal),

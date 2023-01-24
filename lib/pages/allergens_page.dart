@@ -20,7 +20,7 @@ class _AllergensPageState extends State<AllergensPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Wybór alergenów'),
+        title: const Text('Wybór alergenów'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -63,10 +63,10 @@ class _AllergensPageState extends State<AllergensPage> {
         stream: allergens,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Text("Coś poszło nie tak!");
+            return const Text("Coś poszło nie tak!");
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Ładowanie...');
+            return const Text('Ładowanie...');
             }
             return ListView.builder(
               itemCount: snapshot.data!.docs.length,
@@ -84,8 +84,8 @@ class _AllergensPageState extends State<AllergensPage> {
                     ),
                     value: data['isChecked'],
                     onChanged: (bool? value) {
-                      FirebaseFirestore.instance.collection('Users').doc(
-                          document.id).update(
+                      FirebaseFirestore.instance.collection('Users').doc(uid)
+                      .collection("Allergens").doc(document.id).update(
                         {'isChecked': value!},
                       );
                     }

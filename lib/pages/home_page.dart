@@ -75,19 +75,7 @@ class _HomePageState extends State<HomePage> {
           //       : 'Scan results : $scanResult',
           //   style: TextStyle(fontSize: 18),
           // ),
-          SizedBox(height: 40),
-          // ElevatedButton.icon(
-          //   style: ElevatedButton.styleFrom(
-          //     minimumSize: Size.fromHeight(50),
-          //   ),
-          //   icon: Icon(Icons.arrow_back, size: 32),
-          //   label: Text(
-          //     'Wyloguj się',
-          //     style: TextStyle(fontSize: 24),
-          //   ),
-          //   onPressed: () => FirebaseAuth.instance.signOut(),
-          // ),
-          // SizedBox(height: 40),
+          SizedBox(height: 30),
           FloatingActionButton(
             onPressed: () => FirebaseAuth.instance.signOut(),
             backgroundColor: Colors.green,

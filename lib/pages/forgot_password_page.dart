@@ -27,7 +27,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     appBar: AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      title: Text('Resetowanie hasła'),
+      title: const Text('Resetowanie hasła'),
+      centerTitle: true,
     ),
     body: Padding(
       padding: EdgeInsets.all(16),
@@ -36,7 +37,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Wyślij email by\n zresetować hasło',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 24),

@@ -32,7 +32,7 @@ class _ResultPageState extends State<ResultPage> {
         centerTitle: true,
         title: Text('Karta produktu'),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -40,31 +40,26 @@ class _ResultPageState extends State<ResultPage> {
             if (product != null) ...[
               Image.network(
                 product!.imageFrontSmallUrl!,
-                height: 200,
+                height: 300,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.scaleDown,
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 20),
               Text(
                 product!.productName!,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-              // Text(
-              //   'Kod kreskowy: ${product.code}',
-              //  style: TextStyle(fontSize: 18),
-              // ),
+               Text(
+                 'Kod kreskowy: ${product?.barcode}',
+                style: TextStyle(fontSize: 18),
+               ),
               SizedBox(height: 8),
               Text(
                 'Producent: ${product!.brands}',
                 style: TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 8),
-              Text(
-                'Skład: ${product!.ingredientsText}',
-                style: TextStyle(fontSize: 18),
-              ),
-              SizedBox(height: 8),
+              SizedBox(height: 20),
               FutureBuilder(
                 future: getSelectedAllergens(),
                 builder: (context, snapshot) {
@@ -75,13 +70,32 @@ class _ResultPageState extends State<ResultPage> {
                     final allergensInProduct = product!.allergens.toString().split(",");
                     final matchingAllergens = selectedAllergens.where((allergen) => allergensInProduct!.contains(allergen)).toList();
                     if (matchingAllergens.isEmpty) {
-                      return Text("Produkt nie zawiera alergenów");
+                      return Text(
+                        "Produkt nie zawiera alergenów",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.yellow,
+                        ),
+                      );
                     } else {
-                      return Text("Alergeny: " + matchingAllergens.join(", "), style: TextStyle(color: Colors.red));
+                      return Text(
+                          "Alergeny: " + matchingAllergens.join(", "),
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.red
+                          ),
+                      );
                     }
                   }
                 },
               ),
+              SizedBox(height: 20),
+              Text(
+                'Skład: ${product!.ingredientsText}',
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 8),
             ],
             if (product == null)
               Text('Brak informacji o produkcie ${widget.scanResult}'),
