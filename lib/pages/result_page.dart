@@ -60,6 +60,14 @@ class _ResultPageState extends State<ResultPage> {
                 style: TextStyle(fontSize: 18),
               ),
               SizedBox(height: 20),
+              // Text(
+              //   "Alergeny: Orzechy, Mleko, Gluten",
+              //   textAlign: TextAlign.center,
+              //   style: TextStyle(
+              //     fontSize: 24,
+              //     color: Colors.red,
+              //   ),
+              // ),
               FutureBuilder(
                 future: getSelectedAllergens(),
                 builder: (context, snapshot) {

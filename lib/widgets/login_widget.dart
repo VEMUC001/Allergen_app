@@ -46,12 +46,6 @@ class _LoginWidgetState extends State<LoginWidget> {
        SizedBox(height: 35),
        Image.asset('assets/images/barcode-scanner.png'),
        SizedBox(height: 20),
-       // Text(
-       //   'Witaj!',
-       //   textAlign: TextAlign.center,
-       //   style: TextStyle(fontSize: 35, fontWeight: FontWeight.normal),
-       // ),
-       //SizedBox(height: 20),
        TextField(
          controller: emailController,
          cursorColor: Colors.white,

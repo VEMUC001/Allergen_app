@@ -42,14 +42,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: 60),
-          FlutterLogo(size: 120),
-          SizedBox(height: 20),
           const Text(
-            'Cześć, witaj z powrotem!',
+            'Allergen Scanner',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.normal),
+            style: TextStyle(fontSize: 35, fontWeight: FontWeight.normal),
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 35),
+          Image.asset('assets/images/barcode-scanner.png'),
+          SizedBox(height: 20),
           TextFormField(
             controller: emailController,
             cursorColor: Colors.white,
