@@ -40,13 +40,11 @@ class _AllergensPageState extends State<AllergensPage> {
               {"name": "Jajka", "isChecked": false},
               {"name": "Soja", "isChecked": false},
               {"name": "Seler", "isChecked": false},
-              {"name": "Musztarda", "isChecked": false},
-              {"name": "Sezam", "isChecked": false},
+              {"name": "Nasiona Sezamu", "isChecked": false},
               {"name": "Łubin", "isChecked": false},
-              {"name": "Małże", "isChecked": false},
+              {"name": "Mięczaki", "isChecked": false},
               {"name": "Siarczyny", "isChecked": false},
-              {"name": "Kukurydza", "isChecked": false},
-              {"name": "Gryka", "isChecked": false}
+              {"name": "Gorczyca", "isChecked": false}
             ];
             for (var i = 0; i < allergens.length; i++) {
               await FirebaseFirestore.instance.collection("Users").doc(uid).collection("Allergens").add({
